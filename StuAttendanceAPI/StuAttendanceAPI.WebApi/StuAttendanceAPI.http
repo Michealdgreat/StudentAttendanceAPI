@@ -1,0 +1,6 @@
+@RStuAttendanceAPI_HostAddress = http://localhost:5219
+
+GET {{StuAttendanceAPI}}/weatherforecast/
+Accept: application/json
+
+###
