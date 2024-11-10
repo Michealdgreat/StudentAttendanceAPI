@@ -1,4 +1,5 @@
-﻿using Common.Domain.Repository;
+﻿using Common.Application.Validation;
+using Common.Domain.Repository;
 using Dapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -19,12 +20,13 @@ namespace StuAttendanceAPI.Infrastructure.Repositories.Base
     {
 
 
-        public async Task SaveData<T>(string dBSp, T parameters)
+        public async Task<int> SaveData<T>(string dBSp, T parameters)
         {
 
             using IDbConnection connection = new NpgsqlConnection(BaseConstants.StuAttConnectionString);
 
-            var result = await connection.ExecuteAsync(dBSp, parameters, commandType: CommandType.StoredProcedure);
+            return await connection.ExecuteAsync(dBSp, parameters, commandType: CommandType.StoredProcedure);
+
         }
 
         public async Task<int> DeleteData<T>(string dBSp, T parameters)
