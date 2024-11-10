@@ -9,11 +9,4 @@ namespace Common.Application
     {
     }
 
-    /// <summary>
-    /// Every command that provide a response should inherit from this interface, where TData is the Response
-    /// </summary>
-    /// <typeparam name="TData"> Response. Constraint is a Class</typeparam>
-    public interface IBaseCommand<TData> : IRequest<OperationResult<TData>>
-    {
-    }
 }

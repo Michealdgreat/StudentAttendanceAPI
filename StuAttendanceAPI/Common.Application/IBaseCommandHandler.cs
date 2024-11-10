@@ -10,13 +10,4 @@ namespace Common.Application
     {
     }
 
-
-    /// <summary>
-    /// Command handlker that porovide a response should inherit from this interface.
-    /// </summary>
-    /// <typeparam name="TCommand">Command</typeparam>
-    /// <typeparam name="TResponseData">Response</typeparam>
-    public interface IBaseCommandHandler<TCommand, TResponseData> : IRequestHandler<TCommand, OperationResult<TResponseData>> where TCommand : IBaseCommand<TResponseData>
-    {
-    }
 }

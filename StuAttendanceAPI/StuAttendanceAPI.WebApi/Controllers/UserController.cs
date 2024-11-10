@@ -4,6 +4,7 @@ using Application.User.Services;
 using Application.User.UserLogin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using StuAttendanceAPI.Application.User.UserLogin;
 using StuAttendanceAPI.Base;
 using StuAttendanceAPI.PresentationFacade.User;
 
@@ -79,19 +80,16 @@ namespace StuAttendanceAPI.Controllers
         /// <summary>
         /// User login endpoint.
         /// </summary>
-        /// <param name="Email"></param>
-        /// <param name="Password"></param>
-        /// <returns></returns>
+        /// <param name="COmmand.TaggId"></param>
+        /// <returns>Token</returns>
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(string Email, string Password)
+        public async Task<IActionResult> Login(UserLoginCommand command)
         {
-            if (string.IsNullOrEmpty(Email))
-                return BadRequest("Email field cannot be null");
+            if (string.IsNullOrEmpty(command.TagId))
+                return BadRequest("Field cannot be null");
 
-            if (string.IsNullOrEmpty(Password))
-                return BadRequest("Password cannot be null");
+            var token = await _userFacade.Login(command);
 
-            var token = await _userService.GenerateAToken(Email, Password);
             return Ok(token);
         }
 

@@ -15,12 +15,14 @@ namespace Query.User.GetList
 
         public async Task<List<UserDTO>> Handle(GetUserListQuery request, CancellationToken cancellationToken)
         {
-            var (GetAllUsersQuery, Parameter) = StuAttSqlFactory.GetAllUsers();
+            //var (GetAllUsersQuery, Parameter) = StuAttSqlFactory.GetAllUsers();
 
-            var result = await _userRepository.LoadData<UserDTO, dynamic>(GetAllUsersQuery, Parameter);
+            //  var result = await _userRepository.LoadData<UserDTO, dynamic>(GetAllUsersQuery, Parameter);
 
 
-            return result;
+            //return result;
+
+            throw new NotImplementedException();
         }
     }
 }
