@@ -54,20 +54,13 @@ namespace Application.User.Register
                     fname = UserParameter.FirstName,
                     lname = UserParameter.LastName,
                     email = UserParameter.Email,
-                    role = UserParameter.UserRole,
+                    role = UserParameter.UserRole.ToString(),
                     avatar_url = UserParameter.AvatarUrl,
+                    user_password = UserParameter.Password,
                     created_at = UserParameter.CreatedAt
                 });
 
-                if (result > 1)
-                {
-                    return OperationResult.Success();
-                }
-                else
-                {
-                    return OperationResult.Error();
-
-                }
+                return OperationResult.Success();
 
             }
             catch (Exception ex)

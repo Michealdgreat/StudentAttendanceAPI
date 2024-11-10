@@ -14,8 +14,6 @@ namespace StuAttendanceAPI.Infrastructure
         {
             services.AddTransient<IUserRepository, UserRepository>();
 
-
-            services.AddTransient<IUserService, UserService>();
         }
     }
 }

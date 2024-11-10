@@ -18,11 +18,9 @@ namespace StuAttendanceAPI.Controllers
     public class UserController : ApiControllerBase
     {
         private readonly IUserFacade _userFacade;
-        private readonly IUserService _userService;
-        public UserController(IUserFacade userFacade, IUserService userService)
+        public UserController(IUserFacade userFacade)
         {
             _userFacade = userFacade;
-            _userService = userService;
         }
 
         /// <summary>
