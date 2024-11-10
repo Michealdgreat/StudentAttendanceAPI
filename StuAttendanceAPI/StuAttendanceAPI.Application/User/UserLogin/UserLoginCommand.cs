@@ -5,7 +5,6 @@ namespace StuAttendanceAPI.Application.User.UserLogin
 {
     public class UserLoginCommand : IRequest<object>
     {
-        public string? Email { set; get; }
-        public string? Password { set; get; }
+        public string? TagId { set; get; }
     }
 }

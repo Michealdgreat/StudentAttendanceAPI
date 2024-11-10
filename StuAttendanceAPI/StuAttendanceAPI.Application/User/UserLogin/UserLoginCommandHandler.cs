@@ -8,6 +8,7 @@ using StuAttendanceAPI.Domain.UserAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,34 +30,50 @@ namespace Application.User.UserLogin
         public async Task<object> Handle(UserLoginCommand request, CancellationToken cancellationToken)
         {
 
-            var user = await FindUserByEmail(request.Email!) ?? throw new AuthenticationException("User not found");
-            var hashedPassword = Sha256Hasher.Hash(request.Password!);
 
-            if (user.Password != hashedPassword)
-                throw new AuthenticationException("Password not correct");
-
-
-            async Task<UserDtoForClaims?> FindUserByEmail(string email)
+            try
             {
-                try
+                var hashedTagId = Sha256Hasher.Hash(request.TagId!);
+
+                var user = await FindUserByHashedPassword(hashedTagId);
+
+                if (user == null)
                 {
-                    var (emailQuery, emailParameter) = StuAttSqlFactory.GetUserByEmailQuery(email);
-                    return await _repository.LoadOneData<UserDtoForClaims, dynamic>(emailQuery, emailParameter);
+                    return HttpStatusCode.NotFound;
                 }
-                catch (Exception ex)
+
+
+
+                async Task<UserDtoForClaims?> FindUserByHashedPassword(string Password)
                 {
-                    throw new DataAccessException("An error occurred while accessing the database.", ex);
+                    try
+                    {
+                        var (emailQuery, emailParameter) = StuAttSqlFactory.GetUserByPasswordQuery(Password);
+                        return await _repository.LoadOneData<UserDtoForClaims, dynamic>(emailQuery, emailParameter);
+                    }
+                    catch (Exception)
+                    {
+                        return null;
+                    }
                 }
+
+                var token = _tokenService.Generate(user);
+
+                return new
+                {
+                    Token = token,
+                    user.UserId,
+                    user.Email,
+                    user.Password
+                };
+
             }
-
-            var token = _tokenService.Generate(user);
-
-            return new
+            catch (Exception)
             {
-                Token = token,
-                user.UserId,
-                user.Password
-            };
+
+                return HttpStatusCode.InternalServerError;
+
+            }
 
         }
     }

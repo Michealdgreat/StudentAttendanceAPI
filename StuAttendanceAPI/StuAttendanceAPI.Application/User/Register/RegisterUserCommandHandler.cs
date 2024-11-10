@@ -6,6 +6,9 @@ using StuAttendanceAPI.Domain;
 using System;
 using System.Net;
 using StuAttendanceAPI.Domain.UserAggregate;
+using StuAttendanceAPI.Domain.RoleAggregate;
+using System.Xml.Linq;
+using System.Data;
 
 namespace Application.User.Register
 {
@@ -29,34 +32,45 @@ namespace Application.User.Register
         {
             try
             {
+                var password = Sha256Hasher.Hash(request.TagId!);
 
-                var (EmailSqlQuery, EmailParameters) = StuAttSqlFactory.GetUserByEmailQuery(request.Email);
+                var (TagSqlQuery, TagIdParameters) = StuAttSqlFactory.GetUserByPasswordQuery(password);
 
 
-
-                var checkUser = await _userRepository.LoadOneData<UserDto, dynamic>(EmailSqlQuery, EmailParameters);
+                var checkUser = await _userRepository.LoadOneData<UserDto, dynamic>(TagSqlQuery, TagIdParameters);
 
                 if (checkUser != null)
                 {
                     return OperationResult.Error("User already exist");
                 }
 
-                var password = Sha256Hasher.Hash(request.Password);
+
+                var UserParameter = StuAttendanceAPI.Domain.UserAggregate.User.UserFactory.CreateNew(request.FirstName!, request.LastName!, request.Email!, password, request.UserRole, null);
 
 
-                var UserParameter = StuAttendanceAPI.Domain.UserAggregate.User.UserFactory.CreateNew(new Guid(), request.FirstName, request.LastName, request.UserName, request.Email);
-
-
-                await _userRepository.SaveData<dynamic>("insert_user", new
+                var result = await _userRepository.SaveData<dynamic>("insert_user", new
                 {
-
-                    p_email = UserParameter.Email,
-                    p_password = UserParameter.Password,
+                    user_id = UserParameter.UserId,
+                    fname = UserParameter.FirstName,
+                    lname = UserParameter.LastName,
+                    email = UserParameter.Email,
+                    role = UserParameter.UserRole,
+                    avatar_url = UserParameter.AvatarUrl,
+                    created_at = UserParameter.CreatedAt
                 });
 
-                return OperationResult.Success();
+                if (result > 1)
+                {
+                    return OperationResult.Success();
+                }
+                else
+                {
+                    return OperationResult.Error();
+
+                }
+
             }
-            catch (InvalidDomainDataException ex)
+            catch (Exception ex)
             {
                 return OperationResult.Error(ex.Message);
             }

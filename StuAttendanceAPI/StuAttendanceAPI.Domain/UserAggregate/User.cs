@@ -15,7 +15,7 @@ namespace StuAttendanceAPI.Domain.UserAggregate
         public string Email { get; private set; }
         public string Password { get; private set; }
         public Role UserRole { get; private set; }
-        public string AvatarUrl { get; private set; }
+        public string? AvatarUrl { get; private set; }
         public DateTime CreatedAt { get; private set; }
 
 
@@ -36,9 +36,9 @@ namespace StuAttendanceAPI.Domain.UserAggregate
         /// </summary>
         public static class UserFactory
         {
-            public static User CreateNew(string firstName, string lastName, string email, string password, Role role, string avatarUrl)
+            public static User CreateNew(string firstName, string lastName, string email, string password, Role role, string? avatarUrl)
             {
-                return new User(Guid.NewGuid(), firstName, lastName, email, password, role, avatarUrl, DateTime.Now);
+                return new User(Guid.NewGuid(), firstName, lastName, email, password, role, avatarUrl!, DateTime.Now);
             }
 
             public static User UpdateExisting(Guid userId, string firstName, string lastName, string email, string password, Role role, string avatarUrl, DateTime createdAt)
