@@ -10,10 +10,10 @@ namespace StuAttendanceAPI.Application.Course.Update
 {
     public class UpdateCourseCommand : IBaseCommand
     {
-        public Guid CourseId { get; private set; }
-        public string? CourseName { get; private set; }
-        public Guid TeacherId { get; private set; }
-        public DateTime CreatedAt { get; private set; }
+        public Guid CourseId { get; set; }
+        public string? CourseName { get; set; }
+        public Guid TeacherId { get; set; }
+        public DateTime CreatedAt { get; set; }
         public UserInfo? CommandSender { get; set; }
 
     }

@@ -1,4 +1,5 @@
 ﻿using Common.Application;
+using StuAttendanceAPI.Domain.UserAggregate;
 using System;
 using System.Linq;
 
@@ -6,11 +7,13 @@ namespace StuAttendanceAPI.Application.Session.Create
 {
     public class CreateSessionCommand : IBaseCommand
     {
-        public Guid SessionId { get; private set; }
-        public Guid CourseId { get; private set; }
-        public DateTime Date { get; private set; }
-        public TimeSpan StartAt { get; private set; }
-        public TimeSpan EndAt { get; private set; }
-        public string? Name { get; private set; }
+        public Guid SessionId { get; set; }
+        public Guid CourseId { get; set; }
+        public DateTime Date { get; set; }
+        public TimeSpan StartAt { get; set; }
+        public TimeSpan EndAt { get; set; }
+        public string? Name { get; set; }
+        public UserInfo? CommandSender { get; set; }
+
     }
 }
