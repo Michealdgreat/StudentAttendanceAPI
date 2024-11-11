@@ -1,17 +1,47 @@
 ﻿using Common.Application;
+using StuAttendanceAPI.Domain.CourseAggregate;
+using StuAttendanceAPI.Domain.RoleAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static StuAttendanceAPI.Domain.CourseAggregate.Course;
 
 namespace StuAttendanceAPI.Application.Course.Create
 {
-    public class CreateCourseCommandHandler : IBaseCommandHandler<CreateCourseCommand>
+    public class CreateCourseCommandHandler(ICourseRepository courseRepository) : IBaseCommandHandler<CreateCourseCommand>
     {
-        public Task<OperationResult> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
+        private readonly ICourseRepository _courseRepository = courseRepository;
+
+        public async Task<OperationResult> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                if (request.CommandSender!.Role != Role.Teacher.ToString())
+                {
+                    return OperationResult.Error("NOT ALLOWED!. Only Teachers can create a course.");
+                }
+
+                var courseParameter = CourseFactory.CreateNew(request.CourseName!, request.TeacherId);
+
+
+                await _courseRepository.SaveData<dynamic>("insert_course", new
+                {
+                    course_id = new Guid(),
+                    course_name = request.CourseName,
+                    teacher_id = request.TeacherId,
+                    created_at = DateTime.Now
+                });
+
+                return OperationResult.Success();
+            }
+            catch (Exception)
+            {
+
+                return OperationResult.Error();
+            }
         }
     }
 }

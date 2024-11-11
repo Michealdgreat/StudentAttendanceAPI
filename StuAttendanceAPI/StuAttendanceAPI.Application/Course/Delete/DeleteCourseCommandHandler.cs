@@ -1,17 +1,34 @@
 ﻿using Common.Application;
+using StuAttendanceAPI.Domain.ContextHelper;
+using StuAttendanceAPI.Domain.CourseAggregate;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Cryptography;
 
 namespace StuAttendanceAPI.Application.Course.Delete
 {
-    public class DeleteCourseCommandHandler : IBaseCommandHandler<DeleteCourseCommand>
+    public class DeleteCourseCommandHandler(ICourseRepository courseRepository) : IBaseCommandHandler<DeleteCourseCommand>
     {
-        public Task<OperationResult> Handle(DeleteCourseCommand request, CancellationToken cancellationToken)
+        private readonly ICourseRepository _courseRepository = courseRepository;
+
+        public async Task<OperationResult> Handle(DeleteCourseCommand request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var (courseQuery, courseParameter) = StuAttSqlFactory.GetCourseByIdQuery(request.CourseId);
+
+            var checkOwnerShip = await _courseRepository.LoadOneData<CourseDto, dynamic>(courseQuery, courseParameter);
+
+            if (checkOwnerShip == null || checkOwnerShip.TeacherId != request.CommandSender!.UserId)
+            {
+                return OperationResult.Error();
+            }
+
+            await _courseRepository.DeleteData<dynamic>("delete_course", new
+            {
+                cid = request.CourseId
+            });
+
+
+            return OperationResult.Success();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Common.Application;
+using StuAttendanceAPI.Domain.UserAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,7 @@ namespace StuAttendanceAPI.Application.Course.Delete
 {
     public class DeleteCourseCommand : IBaseCommand
     {
+        public Guid CourseId { get; set; }
+        public UserInfo? CommandSender { get; set; }
     }
 }

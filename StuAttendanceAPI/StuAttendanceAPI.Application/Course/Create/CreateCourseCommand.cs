@@ -1,4 +1,5 @@
 ﻿using Common.Application;
+using StuAttendanceAPI.Domain.UserAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,10 @@ namespace StuAttendanceAPI.Application.Course.Create
 {
     public class CreateCourseCommand : IBaseCommand
     {
-        public Guid CourseId { get; private set; }
-        public string? CourseName { get; private set; }
-        public Guid TeacherId { get; private set; }
-        public DateTime CreatedAt { get; private set; }
+        public Guid CourseId { get; set; }
+        public string? CourseName { get; set; }
+        public Guid TeacherId { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public UserInfo? CommandSender { get; set; }
     }
 }

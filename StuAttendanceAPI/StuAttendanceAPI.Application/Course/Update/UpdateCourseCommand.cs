@@ -1,4 +1,5 @@
 ﻿using Common.Application;
+using StuAttendanceAPI.Domain.UserAggregate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,7 @@ namespace StuAttendanceAPI.Application.Course.Update
         public string? CourseName { get; private set; }
         public Guid TeacherId { get; private set; }
         public DateTime CreatedAt { get; private set; }
+        public UserInfo? CommandSender { get; set; }
+
     }
 }
