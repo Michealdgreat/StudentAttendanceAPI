@@ -1,4 +1,5 @@
 ﻿using Common.Application;
+using StuAttendanceAPI.Domain.UserAggregate;
 using System;
 using System.Linq;
 
@@ -11,5 +12,7 @@ namespace StuAttendanceAPI.Application.AttendanceRecord.Update
         public Guid StudentId { get; private set; }
         public DateTime SignInAt { get; private set; }
         public DateTime SignOutAt { get; private set; }
+        public UserInfo? CommandSender { get; set; }
+
     }
 }
