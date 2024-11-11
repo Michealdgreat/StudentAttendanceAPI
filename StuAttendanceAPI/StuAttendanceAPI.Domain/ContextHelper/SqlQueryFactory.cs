@@ -8,6 +8,7 @@
         {
             internal const string GetUserById = "SELECT * FROM get_user_by_id(@p_uid)";
             internal const string GetUserByEmail = "SELECT * FROM get_user_by_email(@p_email)";
+            internal const string GetCourseById = "SELECT * FROM public.get_course_by_id(@p_course_id)";
             internal const string GetCourseByName = "SELECT * FROM get_course_by_name(@p_course_name)";
             internal const string GetCoursesByTeacherName = "SELECT * FROM get_courses_by_teacher_name(@p_teacher_name)";
             internal const string GetStudentById = "SELECT * FROM get_student_by_id(@p_sid)";
@@ -29,6 +30,12 @@
         {
             var parameters = new { p_email = email };
             return (Queries.GetUserByEmail, parameters);
+        }
+
+        public static (string Query, object Parameters) GetCourseByIdQuery(Guid courseId)
+        {
+            var parameters = new { p_course_id = courseId };
+            return (Queries.GetCourseById, parameters);
         }
 
         public static (string Query, object Parameters) GetCourseByNameQuery(string courseName)

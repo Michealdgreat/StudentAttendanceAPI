@@ -1,6 +1,5 @@
 ﻿using Application.User.Services;
 using Common.Application.SecurityUtil;
-using Common.Application.Validation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -8,13 +7,11 @@ using StuAttendanceAPI.Application.User.UserLogin;
 using StuAttendanceAPI.Domain.ContextHelper;
 using StuAttendanceAPI.Domain.UserAggregate;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.User.UserLogin
 {
@@ -96,6 +93,7 @@ namespace Application.User.UserLogin
             var claims = new List<Claim>
             {
                 new (ClaimTypes.NameIdentifier, user.UserId.ToString()),
+                new (ClaimTypes.Role, user.Role!),
                 new (ClaimTypes.Email, user.Email!),
 
             };

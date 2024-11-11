@@ -1,6 +1,4 @@
-﻿using Common.Domain.Exceptions;
-using Common.Domain.Tools;
-using StuAttendanceAPI.Domain.RoleAggregate;
+﻿using StuAttendanceAPI.Domain.RoleAggregate;
 
 namespace StuAttendanceAPI.Domain.UserAggregate
 {

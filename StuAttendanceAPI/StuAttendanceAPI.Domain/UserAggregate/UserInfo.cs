@@ -8,6 +8,7 @@
     {
         public Guid UserId;
         public string? Email;
+        public string? Role;
 
     }
 }

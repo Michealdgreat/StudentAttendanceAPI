@@ -3,7 +3,6 @@ using Application.User.Register;
 using Common.Application;
 using MediatR;
 using StuAttendanceAPI.Application.User.UserLogin;
-using StuAttendanceAPI.PresentationFacade.User;
 using StuAttendanceAPI.Query.User.DTO;
 using StuAttendanceAPI.Query.User.GetById;
 using StuAttendanceAPI.Query.User.GetList;

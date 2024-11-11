@@ -1,7 +1,5 @@
 using Application.User.DeleteUser;
 using Application.User.Register;
-using Application.User.Services;
-using Application.User.UserLogin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using StuAttendanceAPI.Application.User.UserLogin;
@@ -40,6 +38,7 @@ namespace StuAttendanceAPI.Controllers
         [HttpDelete("DeleteUser")]
         public async Task<IActionResult> DeleteUser(DeleteUserCommand command)
         {
+            command.CommandSender = this.UserInformation;
             var result = await _userFacade.DeleteUser(command);
 
             return Ok(result);

@@ -1,6 +1,5 @@
 ﻿using Common.Application;
 using StuAttendanceAPI.Domain.RoleAggregate;
-using System.Net.Sockets;
 
 namespace Application.User.Register
 {

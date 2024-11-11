@@ -1,14 +1,8 @@
 ﻿using Common.Application;
 using Common.Application.SecurityUtil;
-using Common.Domain.Exceptions;
 using StuAttendanceAPI.Domain.ContextHelper;
-using StuAttendanceAPI.Domain;
-using System;
-using System.Net;
 using StuAttendanceAPI.Domain.UserAggregate;
-using StuAttendanceAPI.Domain.RoleAggregate;
-using System.Xml.Linq;
-using System.Data;
+using System;
 
 namespace Application.User.Register
 {
@@ -48,7 +42,7 @@ namespace Application.User.Register
                 var UserParameter = StuAttendanceAPI.Domain.UserAggregate.User.UserFactory.CreateNew(request.FirstName!, request.LastName!, request.Email!, password, request.UserRole, null);
 
 
-                var result = await _userRepository.SaveData<dynamic>("insert_user", new
+                await _userRepository.SaveData<dynamic>("insert_user", new
                 {
                     user_id = UserParameter.UserId,
                     fname = UserParameter.FirstName,

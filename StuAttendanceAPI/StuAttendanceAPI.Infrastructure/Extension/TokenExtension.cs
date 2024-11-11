@@ -11,11 +11,12 @@ namespace StuAttendanceAPI.Infrastructure.Extension
         public static UserInfo GetUserInfo(this ClaimsIdentity claimsIdentity)
         {
             var emailClaim = claimsIdentity.FindFirst(ClaimTypes.Email);
-            var nameClaim = claimsIdentity.FindFirst(ClaimTypes.Name);
             var userIdClaim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            var userRoleClaim = claimsIdentity.FindFirst(ClaimTypes.Role);
 
 
-            if (emailClaim == null || nameClaim == null || userIdClaim == null)
+
+            if (emailClaim == null || userIdClaim == null)
             {
                 throw new Exception("Required claim is missing");
             }
@@ -24,6 +25,7 @@ namespace StuAttendanceAPI.Infrastructure.Extension
             {
 
                 UserId = Guid.Parse(userIdClaim.Value),
+                Role = userRoleClaim!.Value,
                 Email = emailClaim.Value
             };
 

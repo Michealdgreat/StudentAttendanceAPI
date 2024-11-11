@@ -1,9 +1,5 @@
-﻿using Common.Application.Validation;
-using Common.Domain.Repository;
+﻿using Common.Domain.Repository;
 using Dapper;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Npgsql;
 using System.Data;
 
