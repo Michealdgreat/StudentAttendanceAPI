@@ -18,6 +18,11 @@
             internal const string GetTeacherCoursesAndSessions = "SELECT * FROM get_teacher_courses_and_sessions(@p_teacher_id)";
             internal const string GetUserByRole = "SELECT * FROM get_user_by_role(@p_user_role)";
             internal const string GetUserByPassword = "SELECT * FROM public.get_user_by_password(@p_password)";
+            internal const string GetAttendanceBySessionAndStudent = "SELECT * FROM public.get_attendance_for_session_and_student(@p_session_id, @p_student_id)";
+            internal const string GetSessionById = "SELECT * FROM public.get_session_by_id(@p_session_id)";
+            internal const string GetSessionDetailsById = "SELECT * FROM public.get_session_details_by_id(@p_session_id)";
+
+
         }
 
         public static (string Query, object Parameters) GetUserByIdQuery(Guid uid)
@@ -90,6 +95,22 @@
         {
             var parameters = new { p_password = password };
             return (Queries.GetUserByPassword, parameters);
+        }
+
+        public static (string Query, object Parameters) GetAttendanceBySessionAndStudentQuery(Guid sessionId, Guid studentId)
+        {
+            var parameters = new { p_session_id = sessionId, p_student_id = studentId };
+            return (Queries.GetAttendanceBySessionAndStudent, parameters);
+        }
+        public static (string Query, object Parameters) GetSessionByIdQuery(Guid sessionId)
+        {
+            var parameters = new { p_session_id = sessionId };
+            return (Queries.GetSessionById, parameters);
+        }
+        public static (string Query, object Parameters) GetSessionDetailsByIdQuery(Guid sessionId)
+        {
+            var parameters = new { p_session_id = sessionId };
+            return (Queries.GetSessionById, parameters);
         }
     }
 }
