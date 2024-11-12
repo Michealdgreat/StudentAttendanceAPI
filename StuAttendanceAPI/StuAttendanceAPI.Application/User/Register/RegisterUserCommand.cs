@@ -12,6 +12,8 @@ namespace Application.User.Register
         public string? TagId { get; set; }
         public Role UserRole { get; set; }
         public string? AvatarUrl { get; set; }
+        public string? Department { get; set; }
+        public string? StudentGroup { get; set; }
         public DateTime CreatedAt { get; set; }
     }
 }

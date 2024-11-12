@@ -39,6 +39,7 @@ namespace Application.User.Register
                 }
 
 
+
                 var UserParameter = StuAttendanceAPI.Domain.UserAggregate.User.UserFactory.CreateNew(request.FirstName!, request.LastName!, request.Email!, password, request.UserRole, null);
 
 
@@ -53,6 +54,25 @@ namespace Application.User.Register
                     user_password = UserParameter.Password,
                     created_at = UserParameter.CreatedAt
                 });
+
+
+                if (request.UserRole == StuAttendanceAPI.Domain.RoleAggregate.Role.Teacher)
+                {
+                    await _userRepository.SaveData<dynamic>("insert_teacher", new
+                    {
+                        p_userid = UserParameter.UserId,
+                        p_department = request.Department
+                    });
+                }
+
+                if (request.UserRole == StuAttendanceAPI.Domain.RoleAggregate.Role.Student)
+                {
+                    await _userRepository.SaveData<dynamic>("insert_student", new
+                    {
+                        p_userid = UserParameter.UserId,
+                        p_studentgroup = request.StudentGroup
+                    });
+                }
 
                 return OperationResult.Success();
 

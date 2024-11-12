@@ -24,14 +24,14 @@ namespace StuAttendanceAPI.Application.Course.Create
                     return OperationResult.Error("NOT ALLOWED!. Only Teachers can create a course.");
                 }
 
-                var courseParameter = CourseFactory.CreateNew(request.CourseName!, request.TeacherId);
+                var courseParameter = CourseFactory.CreateNew(request.CourseName!, request.CommandSender.UserId);
 
 
                 await _courseRepository.SaveData<dynamic>("insert_course", new
                 {
                     course_id = new Guid(),
-                    course_name = request.CourseName,
-                    teacher_id = request.TeacherId,
+                    course_name = courseParameter.CourseName,
+                    teacher_id = courseParameter.TeacherId,
                     created_at = DateTime.Now
                 });
 
