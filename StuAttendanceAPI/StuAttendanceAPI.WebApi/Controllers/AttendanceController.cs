@@ -44,5 +44,23 @@ namespace StuAttendanceAPI.Controllers
 
             return Ok(result);
         }
+
+        [Authorize]
+        [HttpGet("GetAttendanceBySessionId")]
+        public async Task<IActionResult> GetAttendanceBySessionId(Guid SessionId)
+        {
+            var result = await _attendanceFacade.GetAttendanceBySessionId(SessionId);
+
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet("GetAttendanceBySessionAndStudentId")]
+        public async Task<IActionResult> GetAttendanceBySessionAndStudentId(Guid SessionId, Guid StudentId)
+        {
+            var result = await _attendanceFacade.GetAttendanceBySessionAndStudentId(SessionId, StudentId);
+
+            return Ok(result);
+        }
     }
 }
