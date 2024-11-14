@@ -8,6 +8,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="System.Text.Encodings.Web" Version="9.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\StuAttendanceAPI.Infrastructure\StuAttendanceAPI.Infrastructure.csproj" />
 		<ProjectReference Include="..\Common.Query\Common.Query.csproj" />
 	</ItemGroup>

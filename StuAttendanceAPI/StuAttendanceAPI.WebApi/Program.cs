@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using System.Text.Json;
 using StuAttendanceAPI.Infrastructure.Repositories.Base;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -16,7 +17,6 @@ builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnCh
 var connectionString = builder.Configuration["ConnectionStrings:DefaultConnection"] ?? throw new NullReferenceException("ConnectionString is null");
 
 BaseConstants.StuAttConnectionString = builder.Configuration["ConnectionStrings:DefaultConnection"] ?? throw new NullReferenceException("ConnectionString is null");
-
 
 Bootstrapper.ConfigBootstrapper(services, connectionString);
 ValidationBootstrapper.Init(services);

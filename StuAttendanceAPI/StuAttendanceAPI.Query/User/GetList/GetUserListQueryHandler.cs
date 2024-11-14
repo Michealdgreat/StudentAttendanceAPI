@@ -13,7 +13,7 @@ namespace Query.User.GetList
     {
         private readonly IUserRepository _userRepository = userRepository;
 
-        public async Task<List<UserDTO>> Handle(GetUserListQuery request, CancellationToken cancellationToken)
+        public Task<List<UserDTO>> Handle(GetUserListQuery request, CancellationToken cancellationToken)
         {
             //var (GetAllUsersQuery, Parameter) = StuAttSqlFactory.GetAllUsers();
 

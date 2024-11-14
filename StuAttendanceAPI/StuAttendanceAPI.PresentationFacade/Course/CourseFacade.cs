@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace StuAttendanceAPI.PresentationFacade.Course
 {
     public class CourseFacade(IMediator mediator)
-: ICourseFacade, ICourseFacade
+: ICourseFacade
     {
         private readonly IMediator _mediator = mediator;
 

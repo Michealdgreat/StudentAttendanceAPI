@@ -29,7 +29,7 @@ namespace StuAttendanceAPI.Application.Course.Create
 
                 await _courseRepository.SaveData<dynamic>("insert_course", new
                 {
-                    course_id = new Guid(),
+                    course_id = courseParameter.CourseId,
                     course_name = courseParameter.CourseName,
                     teacher_id = courseParameter.TeacherId,
                     created_at = DateTime.Now
