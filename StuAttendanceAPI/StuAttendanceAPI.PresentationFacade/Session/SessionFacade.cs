@@ -3,6 +3,10 @@ using MediatR;
 using StuAttendanceAPI.Application.Session.Create;
 using StuAttendanceAPI.Application.Session.Delete;
 using StuAttendanceAPI.Application.Session.Update;
+using StuAttendanceAPI.Domain.SessionAggregate;
+using StuAttendanceAPI.Query.Session.GetAllSession;
+using StuAttendanceAPI.Query.Session.GetSessionById;
+using StuAttendanceAPI.Query.Session.GetSessionsByCourseId;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,5 +35,19 @@ namespace StuAttendanceAPI.PresentationFacade.Session
             return await _mediator.Send(command);
         }
 
+        public async Task<SessionDto?> GetSessionById(Guid SessionId)
+        {
+            return await _mediator.Send(new GetSessionByIdQuery(SessionId));
+        }
+
+        public async Task<List<SessionDto>?> GetSessionByCourseId(Guid CourseId)
+        {
+            return await _mediator.Send(new GetSessionByCourseIdQuery(CourseId));
+        }
+
+        public async Task<List<SessionDto>?> GetAllSessions()
+        {
+            return await _mediator.Send(new GetAllSessionQuery());
+        }
     }
 }

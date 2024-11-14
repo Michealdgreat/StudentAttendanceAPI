@@ -21,6 +21,8 @@
             internal const string GetAttendanceBySessionAndStudent = "SELECT * FROM public.get_attendance_for_session_and_student(@p_session_id, @p_student_id)";
             internal const string GetSessionById = "SELECT * FROM public.get_session_by_id(@p_session_id)";
             internal const string GetSessionDetailsById = "SELECT * FROM public.get_session_details_by_id(@p_session_id)";
+            internal const string GetCoursesByTeacherId = "SELECT * FROM public.get_courses_by_teacher_id(@p_teacher_id)";
+            internal const string GetAllSessions = "SELECT * FROM public.get_all_sessions()";
 
 
         }
@@ -111,6 +113,16 @@
         {
             var parameters = new { p_session_id = sessionId };
             return (Queries.GetSessionById, parameters);
+        }
+        public static (string Query, object Parameters) GetCoursesByTeacherIdQuery(Guid teacherId)
+        {
+            var parameters = new { p_teacher_id = teacherId };
+            return (Queries.GetCoursesByTeacherId, parameters);
+        }
+
+        public static string GetAllSessionsFunctionQuery()
+        {
+            return Queries.GetAllSessions;
         }
     }
 }

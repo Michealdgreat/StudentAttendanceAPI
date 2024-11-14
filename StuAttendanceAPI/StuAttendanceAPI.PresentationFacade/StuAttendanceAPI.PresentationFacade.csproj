@@ -7,6 +7,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Session\SessionFacade.cs~RFb098262.TMP" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\StuAttendanceAPI.Application\StuAttendanceAPI.Application.csproj" />
 		<ProjectReference Include="..\Common.Application\Common.Application.csproj" />
 		<ProjectReference Include="..\StuAttendanceAPI.Query\StuAttendanceAPI.Query.csproj" />

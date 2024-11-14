@@ -9,7 +9,7 @@ namespace StuAttendanceAPI.Domain.CourseAggregate
     public class CourseDto
     {
         public Guid CourseId { get; set; }
-        public string CourseName { get; set; }
+        public string? CourseName { get; set; }
         public Guid TeacherId { get; set; }
         public DateTime CreatedAt { get; set; }
     }
