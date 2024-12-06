@@ -3,6 +3,7 @@ using Application.User.Register;
 using Application.User.Services;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using StuAttendanceAPI.Application.Communication;
 using StuAttendanceAPI.Application.User.Services;
 using StuAttendanceAPI.Infrastructure;
 using StuAttendanceAPI.PresentationFacade.Attendance;
@@ -36,6 +37,7 @@ namespace StuAttendanceAPI.Config
             });
 
             services.AddTransient<ITokenService, TokenService>();
+            services.AddTransient<LoginHub>();
             services.AddTransient<IUserFacade, UserFacade>();
             services.AddTransient<ICourseFacade, CourseFacade>();
             services.AddTransient<IAttendanceFacade, AttendanceFacade>();

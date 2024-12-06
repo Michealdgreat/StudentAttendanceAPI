@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using StuAttendanceAPI.Infrastructure.Repositories.Base;
 using System.Reflection;
+using StuAttendanceAPI.Application.Communication;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -42,6 +43,7 @@ services.AddAuthentication(options =>
     };
 });
 
+services.AddSignalR();
 
 services.AddControllers();
 services.AddEndpointsApiExplorer();
@@ -90,6 +92,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<LoginHub>("/loginHub");
 
 Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 
