@@ -16,7 +16,7 @@ namespace StuAttendanceAPI.Application.Session.Create
         {
             try
             {
-                if (request.CommandSender!.Role != Role.Teacher.ToString() || request.CommandSender.Role != Role.Admin.ToString())
+                if (request.CommandSender!.Role != Role.Teacher.ToString())
                 {
                     return OperationResult.Error();
                 }

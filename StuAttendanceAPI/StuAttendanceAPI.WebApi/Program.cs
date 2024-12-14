@@ -9,6 +9,7 @@ using System.Text.Json;
 using StuAttendanceAPI.Infrastructure.Repositories.Base;
 using System.Reflection;
 using StuAttendanceAPI.Application.Communication;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -79,6 +80,12 @@ services.AddSwaggerGen(options =>
 var app = builder.Build();
 
 
+// Using forwarded headers, which enables Nginx to forward the original request scheme
+app.UseForwardedHeaders(new ForwardedHeadersOptions
+{
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+});
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -86,17 +93,37 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// This is SSL redirection, Nginx manages it now in prod
+// app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
 app.MapHub<LoginHub>("/loginHub");
 
 Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 
-
-
 app.Run();
+
+//// Configure the HTTP request pipeline.
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger();
+//    app.UseSwaggerUI();
+//}
+
+//app.UseHttpsRedirection();
+
+//app.UseAuthentication();
+//app.UseAuthorization();
+
+//app.MapControllers();
+
+//app.MapHub<LoginHub>("/loginHub");
+
+//Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
+
+
+
+//app.Run();

@@ -58,6 +58,21 @@ namespace StuAttendanceAPI.Controllers
             return Ok(user);
         }
 
+
+        /// <summary>
+        /// Get user by TagId.
+        /// </summary>
+        /// <param name="TagId"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet("GetByTagId")]
+        public async Task<IActionResult> GetByTagId(string tagId)
+        {
+            var user = await _userFacade.GetByTagId(tagId);
+
+            return Ok(user);
+        }
+
         /// <summary>
         /// Endpoint for user registration.
         /// </summary>

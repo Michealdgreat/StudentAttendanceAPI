@@ -13,7 +13,7 @@
             internal const string GetCoursesByTeacherName = "SELECT * FROM get_courses_by_teacher_name(@p_teacher_name)";
             internal const string GetStudentById = "SELECT * FROM get_student_by_id(@p_sid)";
             internal const string GetAttendanceForSession = "SELECT * FROM get_attendance_for_session(@p_session_id)";
-            internal const string GetSessionsForCourse = "SELECT * FROM get_sessions_for_course(@p_course_id)";
+            internal const string GetSessionsForCourse = "SELECT * FROM get_sessions_for_course(@input_course_id)";
             internal const string GetStudentsForCourse = "SELECT * FROM get_students_for_course(@p_course_id)";
             internal const string GetTeacherCoursesAndSessions = "SELECT * FROM get_teacher_courses_and_sessions(@p_teacher_id)";
             internal const string GetUserByRole = "SELECT * FROM get_user_by_role(@p_user_role)";
@@ -23,8 +23,6 @@
             internal const string GetSessionDetailsById = "SELECT * FROM public.get_session_details_by_id(@p_session_id)";
             internal const string GetCoursesByTeacherId = "SELECT * FROM public.get_courses_by_teacher_id(@p_teacher_id)";
             internal const string GetAllSessions = "SELECT * FROM public.get_all_sessions()";
-
-
         }
 
         public static (string Query, object Parameters) GetUserByIdQuery(Guid uid)
@@ -71,7 +69,7 @@
 
         public static (string Query, object Parameters) GetSessionsForCourseQuery(Guid courseId)
         {
-            var parameters = new { p_course_id = courseId };
+            var parameters = new { input_course_id = courseId };
             return (Queries.GetSessionsForCourse, parameters);
         }
 

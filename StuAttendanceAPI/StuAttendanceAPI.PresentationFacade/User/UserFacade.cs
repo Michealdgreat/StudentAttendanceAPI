@@ -1,11 +1,13 @@
 ﻿using Application.User.DeleteUser;
 using Application.User.Register;
+using Application.User.Services;
 using Common.Application;
 using MediatR;
 using StuAttendanceAPI.Application.User.UserLogin;
 using StuAttendanceAPI.Query.User.DTO;
 using StuAttendanceAPI.Query.User.GetById;
 using StuAttendanceAPI.Query.User.GetList;
+using StuAttendanceAPI.Query.User.GetUserByTagId;
 
 namespace StuAttendanceAPI.PresentationFacade.User
 {
@@ -34,6 +36,11 @@ namespace StuAttendanceAPI.PresentationFacade.User
         public async Task<UserDTO> GetById(Guid UserId)
         {
             return await _mediator.Send(new GetUserByIdQuery(UserId));
+        }
+
+        public async Task<UserDtoForClaims?> GetByTagId(string TagId)
+        {
+            return await _mediator.Send(new GetUserByTagQuery(TagId));
         }
 
         public async Task<List<UserDTO>> GetList()
