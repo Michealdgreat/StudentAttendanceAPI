@@ -1,4 +1,4 @@
-# StuAttendanceAPI
+# StuAttendanceAPI (Tap-In)
 This is a Student Attendance API that allows Teachers to manage and track student attendance information. It follows Domain-Driven Design (DDD) principles and implements Command Query Responsibility Segregation (CQRS) through the Mediator pattern. PostgreSQL is the primary database and Dapper is used for Object-Relational Mapping (ORM).
 
 ## Screenshots
