@@ -1,6 +1,6 @@
 # StuAttendanceAPI (Tap-In)
 
-StuAttendanceAPI, also known as Tap-In, is a Student Attendance API that enables teachers to manage and track student attendance information efficiently. The application follows Domain-Driven Design (DDD) principles and implements Command Query Responsibility Segregation (CQRS) through the Mediator pattern. It uses PostgreSQL as the primary database, and Dapper is utilized for Object-Relational Mapping (ORM). The project is built using **.NET 9**.
+StuAttendanceAPI, also known as Tap-In, is a Student Attendance API that enables teachers to manage and track student attendance information efficiently. The application follows Domain-Driven Design (DDD) principles and implements Command Query Responsibility Segregation (CQRS) through the Mediator pattern. It uses PostgreSQL as the primary database, and Dapper is utilized for Object-Relational Mapping (ORM). The project is built using **.NET 8**.
 
 ## Table of Contents
 
