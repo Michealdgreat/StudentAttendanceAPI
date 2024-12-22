@@ -65,9 +65,9 @@ To set up the project locally, follow these steps:
    - Create a PostgreSQL database for the application.
    - Update the connection string in the `appsettings.json` file located in `StuAttendanceAPI.WebApi` with your database credentials.
 
-4. **Apply Database Migrations:**
+4. **Apply Database:**
 
-   If migrations are set up, apply them using the Entity Framework Core tools or run any provided SQL scripts to set up the necessary tables.
+   Download the database backup in the infrastructure section of the codebase and perform a Restore on your postgreSql database.
 
 5. **Build and Run the Application:**
 
