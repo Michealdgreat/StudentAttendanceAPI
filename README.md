@@ -49,7 +49,7 @@ To set up the project locally, follow these steps:
 1. **Clone the Repository:**
 
    ```bash
-   git clone https://github.com/yourusername/StuAttendanceAPI.git
+   git clone https://github.com/Michealdgreat/StuAttendanceAPI.git
    cd StuAttendanceAPI
    ```
 
