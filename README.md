@@ -67,7 +67,7 @@ To set up the project locally, follow these steps:
 
 4. **Apply Database:**
 
-   Download the database backup in the infrastructure section of the codebase and perform a Restore on your postgreSql database.
+   Download the database backup in the [infrastructure section](StuAttendanceAPI/StuAttendanceAPI.Infrastructure/DatabaseScript) of the codebase and perform a Restore on your postgreSql database.
 
 5. **Build and Run the Application:**
 
