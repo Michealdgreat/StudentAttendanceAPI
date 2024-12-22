@@ -23,7 +23,7 @@ StuAttendanceAPI, also known as Tap-In, is a Student Attendance API that enables
 
 ## Technologies Used
 
-- **.NET 9**: The latest framework for building high-performance applications.
+- **.NET 8**: The framework for building high-performance applications.
 - **PostgreSQL**: An open-source relational database system.
 - **Dapper**: A simple object mapper for .NET, ensuring efficient database operations.
 - **CQRS**: Architectural pattern that separates command (write) and query (read) operations.
